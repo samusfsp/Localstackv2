@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload para o Amazon S3</title>
+</head>
+<body>
+<h1>Criar um novo bucket no Amazon S3</h1>
+<form id="createBucketForm">
+    <label for="bucketName">Nome do Bucket:</label>
+    <input type="text" id="bucketName" required><br><br>
+    <input type="button" value="Criar Bucket" onclick="createBucket()">
+</form>
+
+<script>
+    function createBucket() {
+        const bucketName = document.getElementById("bucketName").value;
+
+        if (!bucketName) {
+            alert("Por favor, insira um nome de bucket.");
+            return;
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", `http://localhost:8080/api/s3/create-bucket/${bucketName}`, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    alert("Bucket criado com sucesso: " + bucketName);
+                } else {
+                    alert("Erro ao criar o bucket: " + xhr.statusText);
+                }
+            }
+        };
+        xhr.send();
+    }
+</script>
+
+</body>
+</html>

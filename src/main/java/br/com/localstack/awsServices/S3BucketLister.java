@@ -1,4 +1,4 @@
-//package br.com.localstack.awsServices;
+package br.com.localstack.awsServices;//package br.com.localstack.awsServices;
 //
 //
 //public class S3BucketLister {

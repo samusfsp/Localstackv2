@@ -1,4 +1,4 @@
-//package br.com.localstack.configuration;
+package br.com.localstack.configuration;//package br.com.localstack.configuration;
 //
 //import software.amazon.awssdk.services.s3.S3Client;
 //import org.springframework.context.annotation.Bean;

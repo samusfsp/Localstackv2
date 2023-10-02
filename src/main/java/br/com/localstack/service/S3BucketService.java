@@ -33,15 +33,18 @@ public class S3BucketService {
         return listBucketsResponse.buckets();
     }
 
-    // Método para fazer upload de um objeto para um bucket no Amazon S3
-    public void uploadObject(String bucketName, String key, String content) {
+    // Método para enviar um objeto para o Amazon S3
+    public void uploadObject(String bucketName, String key, byte[] fileBytes) {
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
                 .key(key)
                 .build();
 
-        s3Client.putObject(putObjectRequest, RequestBody.fromString(content));
+        s3Client.putObject(putObjectRequest, RequestBody.fromBytes(fileBytes));
     }
+
+
+
 
     // Método para listar objetos em um bucket
     public List<S3Object> listObjects(String bucketName) {
