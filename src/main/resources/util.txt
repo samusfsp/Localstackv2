@@ -1,32 +1,23 @@
 Criar um Bucket
 Método: POST
-URL: http://localhost:8080/api/s3/create-bucket/{bucketName}
-
+URL: http://localhost:8080/api/s3/create-bucket/bucketName
+*****************************************************************************************************
 Listar Buckets
 Método: GET
-URL: http://localhost:8080/api/s3/list-buckets
-
+ http://localhost:8080/api/s3/list-buckets
+ *****************************************************************************************************
 Fazer upload de um Objeto
-Método: POST
-URL: http://localhost:8080/api/s3/upload-object
-Selecione form-data.
-Adicione três campos:
-Chave: bucketName, Valor: {nome do bucket}
-Chave: key, Valor: {nome do objeto}
-Chave: content, Valor: {conteúdo do objeto}
-
+Método: Formulario html
+http://localhost:63342/Localstackv2/src/main/resources/forms.html?_ijt=2u2ha7mih9k0d79v8hufkhdju6&_ij_reload=RELOAD_ON_SAVESelecione form-data.
+ *****************************************************************************************************
 Listar Objetos em um Bucket
 Método: GET
-URL: http://localhost:8080/api/s3/list-objects/{bucketName}
-Exemplo de URL: http://localhost:8080/api/s3/list-objects/meu-s3
-
+http://localhost:8080/api/s3/list-objects/nome-do-bucket
+ *****************************************************************************************************
 Recuperar um Objeto
 Método: GET
-URL: http://localhost:8080/api/s3/get-object/{bucketName}/{key}
 Exemplo de URL: http://localhost:8080/api/s3/get-object/meu-s3/meu-objeto
-
+ *****************************************************************************************************
 Excluir um Objeto
 Método: DELETE
-URL: http://localhost:8080/api/s3/delete-object/{bucketName}/{key}
-Exemplo de URL: http://localhost:8080/api/s3/delete-object/meu-s3/meu-objeto
-Lembre-se de substituir {nome do bucket} e {nome do objeto} pelos nomes reais que você deseja usar ao criar e interagir com os buckets e objetos no Amazon S3 via Postman. Certifique-se de que seu aplicativo Spring Boot esteja em execução enquanto você faz essas solicitações.
+http://localhost:8080/api/s3/delete-object/nome-do-bucket/nome-do-objeto

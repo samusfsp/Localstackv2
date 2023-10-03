@@ -1,5 +1,7 @@
 package br.com.localstack.controller;
+
 import br.com.localstack.dto.BucketDTO;
+import br.com.localstack.dto.S3ObjectDTO;
 import br.com.localstack.service.S3BucketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,8 @@ import software.amazon.awssdk.services.s3.model.Bucket;
 import software.amazon.awssdk.services.s3.model.S3Object;
 
 import java.io.IOException;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,32 +64,32 @@ public class S3BucketController {
         }
     }
 
-
-
-
     @GetMapping("/list-objects/{bucketName}")
-    public ResponseEntity<List<S3Object>> listObjects(@PathVariable String bucketName) {
+    public ResponseEntity<List<S3ObjectDTO>> listObjects(@PathVariable String bucketName) {
         List<S3Object> objects = s3BucketService.listObjects(bucketName);
-        return ResponseEntity.ok(objects);
-    }
-
-    @GetMapping("/get-object/{bucketName}/{key}")
-    public ResponseEntity<String> getObject(
-            @PathVariable String bucketName,
-            @PathVariable String key) {
-        String objectContent = s3BucketService.getObject(bucketName, key);
-        if (objectContent != null) {
-            return ResponseEntity.ok(objectContent);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        List<S3ObjectDTO> objectDTOs = objects.stream()
+                .map(object -> {
+                    DateTimeFormatter formatter = DateTimeFormatter
+                            .ofPattern("yyyy-MM-dd HH:mm:ss")
+                            .withZone(ZoneId.systemDefault());
+                    String formattedLastModified = formatter.format(object.lastModified());
+                    return new S3ObjectDTO(object.key(), formattedLastModified);
+                })
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(objectDTOs);
     }
 
     @DeleteMapping("/delete-object/{bucketName}/{key}")
     public ResponseEntity<String> deleteObject(
             @PathVariable String bucketName,
             @PathVariable String key) {
-        s3BucketService.deleteObject(bucketName, key);
-        return ResponseEntity.ok("Objeto excluído com sucesso do bucket: " + bucketName);
+        try {
+            s3BucketService.deleteObject(bucketName, key);
+            return ResponseEntity.ok("Objeto excluído com sucesso do bucket: " + bucketName + "/" + key);
+        } catch (Exception e) {
+            // Lidar com possíveis exceções ao excluir o objeto, se necessário
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir o objeto.");
+        }
     }
 }
