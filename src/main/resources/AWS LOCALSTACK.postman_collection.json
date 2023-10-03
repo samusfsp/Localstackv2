@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "1e7caff4-5fde-4dba-b60a-7577da90512d",
+		"name": "AWS LOCALSTACK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ListBuckets",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "ListObjects",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "CreateBucket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/s3/create-bucket/meu-s3-3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"s3",
+						"create-bucket",
+						"meu-s3-3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateObjects",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/s3/create-bucket/meu-s3-3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"s3",
+						"create-bucket",
+						"meu-s3-3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletObjects",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/s3/delete-object/meu-s3-3/util.txt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"s3",
+						"delete-object",
+						"meu-s3-3",
+						"util.txt"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
