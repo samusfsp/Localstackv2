@@ -18,7 +18,6 @@ public class S3BucketService {
         this.s3Client = s3Client;
     }
 
-    // Método para criar um novo bucket no Amazon S3
     public void createBucket(String bucketName) {
         CreateBucketRequest createBucketRequest = CreateBucketRequest.builder()
                 .bucket(bucketName)

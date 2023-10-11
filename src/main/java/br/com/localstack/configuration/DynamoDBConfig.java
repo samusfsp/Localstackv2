@@ -6,13 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 import java.net.URI;
 
-
 @Configuration
-public class S3Config {
+public class DynamoDBConfig {
 
     @Value("${aws.accessKey}")
     private String accessKey;
@@ -23,24 +22,19 @@ public class S3Config {
     @Value("${aws.region}")
     private String awsRegion;
 
-    @Value("${aws.s3.endpoint}")
-    private String s3Endpoint;
+    @Value("${aws.dynamodb.endpoint}")
+    private String dynamoDbEndpoint;
 
     @Bean
-    public S3Client s3Client() {
+    public DynamoDbClient dynamoDbClient() {
         AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(accessKey, secretKey);
 
         Region region = Region.of(awsRegion);
 
-        // Crie uma URI a partir da String do endpoint
-        URI endpointUri = URI.create(s3Endpoint);
-
-        return S3Client.builder()
+        return DynamoDbClient.builder()
                 .region(region)
-                .endpointOverride(endpointUri) // Use a URI aqui
+                .endpointOverride(URI.create(dynamoDbEndpoint))
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
                 .build();
     }
-
-
 }

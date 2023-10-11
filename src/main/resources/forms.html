@@ -16,16 +16,12 @@
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("uploadForm");
         form.addEventListener("submit", function (event) {
-            event.preventDefault(); // Evita o envio automático do formulário
+            event.preventDefault();
 
             const bucketName = document.getElementById("bucket").value;
             const actionURL = `http://localhost:8080/api/s3/upload-object/${bucketName}`;
             form.action = actionURL;
 
-            // Agora, o formulário está configurado para enviar para o URL correto com o nome do bucket preenchido.
-            // Você pode adicionar lógica adicional para validar o nome do bucket, se necessário.
-
-            // Envie o formulário
             form.submit();
         });
     });

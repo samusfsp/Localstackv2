@@ -30,7 +30,9 @@ public class S3BucketController {
 
     @PostMapping("/create-bucket/{bucketName}")
     public ResponseEntity<String> createBucket(@PathVariable String bucketName) {
+        // Chame o método do serviço para criar o bucket
         s3BucketService.createBucket(bucketName);
+
         return ResponseEntity.ok("Bucket criado com sucesso: " + bucketName);
     }
 
@@ -48,13 +50,10 @@ public class S3BucketController {
             @PathVariable String bucketName,
             @RequestParam("file") MultipartFile file) {
         try {
-            // Obtém os bytes do arquivo
             byte[] fileBytes = file.getBytes();
 
-            // Define a chave do objeto (nome do arquivo)
             String key = file.getOriginalFilename();
 
-            // Carrega o arquivo para o bucket no Amazon S3
             s3BucketService.uploadObject(bucketName, key, fileBytes);
 
             return ResponseEntity.ok("Arquivo enviado com sucesso para o bucket: " + bucketName);
