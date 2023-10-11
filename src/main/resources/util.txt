@@ -21,3 +21,15 @@ Exemplo de URL: http://localhost:8080/api/s3/get-object/meu-s3/meu-objeto
 Excluir um Objeto
 Método: DELETE
 http://localhost:8080/api/s3/delete-object/nome-do-bucket/nome-do-objeto
+
+
+                        DynamoDB
+*********************************************************************************************************
+criação da tabela no DynamoDB usando esquema em json
+aws dynamodb create-table --cli-input-json file://tabela.json --region us-east-1 --endpoint-url http://localhost:4566 --profile localstack
+*********************************************************************************************************
+endpoint  de de Post de atributos
+http://localhost:8080/items/NomeDaTabela
+**********************************************************************************************************
+endpoint  de de GetById de atributos
+http://localhost:8080/items/NomeDaTabela/2

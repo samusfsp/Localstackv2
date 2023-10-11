@@ -15,23 +15,23 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    @PostMapping
-    public void createItem(@RequestBody Item item) {
-        itemService.createItem(item);
+    @PostMapping("/{tableName}")
+    public void createItem(@PathVariable String tableName, @RequestBody Item item) {
+        itemService.createItem(tableName, item);
     }
 
-    @GetMapping("/{id}")
-    public Item getItem(@PathVariable String id) {
-        return itemService.getItemById(id);
+    @GetMapping("/{tableName}/{id}")
+    public Item getItemById(@PathVariable String tableName, @PathVariable String id) {
+        return itemService.getItemById(tableName, id);
     }
 
-    @PutMapping("/{id}")
-    public void updateItem(@PathVariable String id, @RequestBody Item item) {
-        itemService.updateItem(item);
+    @PutMapping("/{tableName}")
+    public void updateItem(@PathVariable String tableName, @RequestBody Item item) {
+        itemService.updateItem(tableName, item);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteItem(@PathVariable String id) {
-        itemService.deleteItemById(id);
+    @DeleteMapping("/{tableName}/{id}")
+    public void deleteItemById(@PathVariable String tableName, @PathVariable String id) {
+        itemService.deleteItemById(tableName, id);
     }
 }

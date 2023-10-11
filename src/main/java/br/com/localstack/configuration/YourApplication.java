@@ -13,10 +13,5 @@ public class YourApplication {
         ApplicationContext context = SpringApplication.run(YourApplication.class, args);
     }
 
-    @Bean
-    public DynamoDbEnhancedClient dynamoDbEnhancedClient(DynamoDbClient dynamoDbClient) {
-        return DynamoDbEnhancedClient.builder()
-                .dynamoDbClient(dynamoDbClient)
-                .build();
-    }
+
 }
